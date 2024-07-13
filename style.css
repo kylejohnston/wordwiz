@@ -1,0 +1,63 @@
+/* styles.css */
+
+body {
+    font-family: Arial, Helvetica, sans-serif !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  h1, p { font-family: sans-serif; }
+  
+  #game-container {
+    font-family: sans-serif;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  #letter-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 50px;
+    text-align: center;
+  }
+  
+  #letter-container {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  #word-input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #submit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  #submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  #word-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #reward-container {
+    margin-top: 20px;
+  }
+  

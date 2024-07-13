@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+  <style>body { font-family: Arial, Helvetica, sans-serif;}</style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Word Game</h1>
+    <p>Think of as many words as possible for the given letter.</p>
+    <label for="letter-input">Enter a letter:</label>
+    <input type="text" id="letter-input" maxlength="1" placeholder="A" />
+    <div id="letter-container">
+      <h2 id="letter">A</h2>
+    </div>
+    <input type="text" id="word-input" placeholder="Enter a word" />
+    <button id="submit-button">Submit</button>
+    <ul id="word-list"></ul>
+    <div id="reward-container"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
