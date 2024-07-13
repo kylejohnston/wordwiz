@@ -3,24 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Word Game</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-  <style>body { font-family: Arial, Helvetica, sans-serif;}</style>
+  <title>Word Guessing Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <div id="game-container">
-    <h1>Word Game</h1>
-    <p>Think of as many words as possible for the given letter.</p>
-    <label for="letter-input">Enter a letter:</label>
-    <input type="text" id="letter-input" maxlength="1" placeholder="A" />
-    <div id="letter-container">
-      <h2 id="letter">A</h2>
+  <div class="container">
+    <div class="game-section">
+      <h1>Word Guessing Game</h1>
+      <div style="display: grid; grid-gap: 18px; margin-bottom: 24px; justify-content: start; border: 1px solid gray; padding: 18px 30px; border-radius: 24px;">
+        <div>
+          <label for="seed-letter">Choose a letter:</label>
+          <input type="text" id="seed-letter" maxlength="1">
+        </div>
+        <div>
+          <label for="timer-toggle">Add a timer?</label>
+          <input type="checkbox" id="timer-toggle">
+        </div>
+        <button id="start-game">Start Game</button>
+      </div>
+      <div id="game-container" style="display: none; border: 1px solid gray; padding: 18px 30px; border-radius: 24px;">
+        <input type="text" id="word-input" placeholder="Enter a word">
+        <button id="submit-word">Submit</button>
+        <div id="message"></div>
+        <div id="word-list"></div>
+      </div>
     </div>
-    <input type="text" id="word-input" placeholder="Enter a word" />
-    <button id="submit-button">Submit</button>
-    <ul id="word-list"></ul>
-    <div id="reward-container"></div>
+    <div class="history-section">
+      <div id="timer-container">
+        <h2>Timer</h2>
+        <span id="timer">01:00</span>
+        <hr>
+      </div>
+
+      <div id="stats">
+        <h2>Current Score</h2>
+        <hr>
+      </div>
+
+      <h2>High Scores</h2>
+      <div id="history-container">
+      </div>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
