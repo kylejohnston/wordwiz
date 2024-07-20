@@ -5,7 +5,6 @@ const wordInput = document.getElementById('word-input');
 const submitButton = document.getElementById('submit-word');
 const messageElement = document.getElementById('message');
 const wordListElement = document.getElementById('word-list');
-const statsElement = document.getElementById('stats');
 const historyContainer = document.getElementById('history-container');
 const timerElement = document.getElementById('timer');
 const timerToggle = document.getElementById('timer-toggle');
@@ -26,8 +25,25 @@ wordInput.addEventListener('keypress', function(e) {
 });
 
 timerToggle.addEventListener('change', function() {
-  timerEnabled = timerToggle.checked;
-  timerElement.style.color = timerEnabled ? 'green' : 'gray';
+    timerEnabled = timerToggle.checked;
+    timerElement.style.display = timerEnabled ? 'flex' : 'none';
+});
+
+seedLetterInput.addEventListener('input', function() {
+    const isDisabled = seedLetterInput.value.length !== 1 || !seedLetterInput.value.match(/[a-z]/i);
+    startGameButton.disabled = isDisabled;
+    startGameButton.classList.toggle('disabled', isDisabled);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    seedLetterInput.focus();
+
+    timerToggle.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter' || event.key === 'Return') {
+            timerToggle.checked = !timerToggle.checked; // Toggle the checkbox
+            timerToggle.dispatchEvent(new Event('change')); // Trigger the change event
+        }
+    });
 });
 
 function startGame() {
@@ -38,22 +54,25 @@ function startGame() {
         return;
     }
     words = [];
-    wordsUntilReward = 5;
+    wordsUntilReward = 5;  // Start with a 5-word increment
     updateWordList();
     updateStats();
     if (timerEnabled) {
-      timeLeft = 60;
-      startTimer();
-      timerElement.style.color = 'green';
-  } else {
-      timerElement.style.color = 'gray';
-  }
-    gameContainer.style.display = 'block';
+        timeLeft = 60;
+        startTimer();
+        timerElement.style.color = '#8800FF';
+    } else {
+        timerElement.style.color = 'gray';
+    }
+    gameContainer.style.display = 'flex';
     wordInput.value = '';
     wordInput.disabled = false;
     submitButton.disabled = false;
     wordInput.focus();
-    showMessage(`Game started! Enter words starting with "${seedLetter.toUpperCase()}"`, 'success');
+    
+    // Initialize the initial message
+    initialMessage = `Add words starting with "${seedLetter.toUpperCase()}"`;
+    showMessage(initialMessage, 'success');
 }
 
 function startTimer() {
@@ -76,7 +95,22 @@ function endGame() {
     clearInterval(timer);
     wordInput.disabled = true;
     submitButton.disabled = true;
-    showMessage('Time is up! Game over.', 'error');
+
+    // Play 'goodjob.mp3' sound
+    const audio = new Audio('goodjob.mp3');
+    audio.play().catch(error => console.error('Error playing audio:', error));
+
+    // Show confetti
+    confetti({
+        particleCount: 200,
+        spread: 360,
+        origin: { y: 0.6 },
+        shapes: ['star']
+    });
+
+    // Show the final message
+    messageElement.textContent = 'Game over!';
+    messageElement.className = 'game-over'; // Use a specific class for game over
 }
 
 function submitWord() {
@@ -102,18 +136,33 @@ function submitWord() {
     words.push(word);
     updateWordList();
     updateStats();
-    showMessage('Word accepted!', 'success');
+    // Reset the message to the initial state when a new word is entered
+    messageElement.textContent = `Add words starting with "${seedLetter.toUpperCase()}"`;
+    messageElement.className = 'success';
     wordInput.value = '';
     checkReward();
 }
 
-function showMessage(text, type) {
+let initialMessage = '';
+
+function showMessage(text, type, keepInitialText = false) {
+    if (type === 'success' && !initialMessage) {
+        initialMessage = messageElement.textContent; // Save the initial message
+    }
+
     messageElement.textContent = text;
     messageElement.className = type;
+
+    if (keepInitialText) {
+        setTimeout(() => {
+            messageElement.textContent = initialMessage || `Add words starting with "${seedLetter.toUpperCase()}"`;
+            messageElement.className = 'success';
+        }, 1000); // delay before restoring the initial message
+    }
 }
 
 function updateWordList() {
-    wordListElement.innerHTML = `<h3>Words (${words.length}):</h3>` + words.join(', ');
+    wordListElement.innerHTML = `<h3>Current score: ${words.length}</h3><p>` + words.join(', ') + `</p>`;
 }
 
 function updateStats() {
@@ -125,28 +174,22 @@ function updateStats() {
         stats[seedLetter].highScore = words.length;
     }
     localStorage.setItem('wordGameStats', JSON.stringify(stats));
-
-    statsElement.innerHTML = `
-      <h3>Stats for "${seedLetter.toUpperCase()}":</h3>
-      <p>Current Score: ${stats[seedLetter].currentScore}</p>
-      <p>High Score: ${stats[seedLetter].highScore}</p>
-    `;
     
     updateHistory();
 }
 
 function checkReward() {
-    if (words.length % wordsUntilReward === 0) {
+    if (words.length % 5 === 0 && words.length !== 0) {
         confetti({
             particleCount: 200,
             spread: 360,
             origin: { y: 0.6 },
-            shapes: ['star']
         });
         playRewardSound();
-        wordsUntilReward = Math.floor(Math.random() * 6) + 5;  // 5-10 words
+        wordsUntilReward += 5;  // Increment by 5 words each time
     }
 }
+
 
 function playRewardSound() {
     const audio = new Audio('reward-sound.mp3');
@@ -168,4 +211,4 @@ function updateHistory() {
 
 // Initialize history on page load
 updateHistory();
-  
+seedLetterInput.focus();

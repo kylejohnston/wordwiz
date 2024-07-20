@@ -5,47 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word Guessing Game</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <div class="game-section">
-      <h1>Word Guessing Game</h1>
-      <div style="display: grid; grid-gap: 18px; margin-bottom: 24px; justify-content: start; border: 1px solid gray; padding: 18px 30px; border-radius: 24px;">
-        <div>
-          <label for="seed-letter">Choose a letter:</label>
-          <input type="text" id="seed-letter" maxlength="1">
+    <div class="primary">
+      <h1>
+        <svg width="300" height="79" viewBox="0 0 300 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.989 77L0.666 3.74H15.429L20.868 65.012H21.423L26.862 3.74H43.179L48.729 65.012H49.173L54.834 3.74H68.709L58.053 77H39.96L34.965 15.506H34.632L29.304 77H10.989ZM86.4308 78.221C82.0648 78.221 78.5498 77.074 75.8858 74.78C73.2218 72.486 71.2978 69.082 70.1138 64.568C68.9298 60.054 68.3378 54.504 68.3378 47.918C68.3378 40.814 68.9668 35.005 70.2248 30.491C71.5568 25.903 73.5548 22.536 76.2188 20.39C78.9568 18.244 82.3978 17.171 86.5418 17.171C90.9818 17.171 94.5338 18.244 97.1978 20.39C99.9358 22.536 101.897 25.866 103.081 30.38C104.265 34.82 104.857 40.555 104.857 47.585C104.857 54.615 104.191 60.424 102.859 65.012C101.601 69.526 99.6028 72.856 96.8648 75.002C94.2008 77.148 90.7228 78.221 86.4308 78.221ZM86.5418 68.009C87.5038 68.009 88.2808 67.639 88.8728 66.899C89.4648 66.085 89.9458 64.864 90.3158 63.236C90.6858 61.608 90.9078 59.536 90.9818 57.02C91.1298 54.504 91.2038 51.544 91.2038 48.14C91.2038 44.366 91.1298 41.184 90.9818 38.594C90.8338 35.93 90.5748 33.784 90.2048 32.156C89.9088 30.454 89.4278 29.27 88.7618 28.604C88.1698 27.864 87.4668 27.494 86.6528 27.494C85.7648 27.494 84.9878 27.864 84.3218 28.604C83.7298 29.344 83.2488 30.528 82.8788 32.156C82.5828 33.784 82.3608 35.967 82.2128 38.705C82.0648 41.369 81.9908 44.588 81.9908 48.362C81.9908 51.766 82.0278 54.689 82.1018 57.131C82.2498 59.573 82.4718 61.608 82.7678 63.236C83.1378 64.864 83.6188 66.085 84.2108 66.899C84.8768 67.639 85.6538 68.009 86.5418 68.009ZM109.656 77V46.142L109.545 18.392H122.088L121.422 41.036H122.31C122.532 35.116 123.198 30.491 124.308 27.161C125.492 23.831 126.972 21.5 128.748 20.168C130.524 18.762 132.448 18.059 134.52 18.059C134.816 18.059 135.038 18.059 135.186 18.059C135.408 18.059 135.667 18.096 135.963 18.17L135.408 33.266C135.038 33.118 134.668 33.044 134.298 33.044C133.928 32.97 133.521 32.933 133.077 32.933C131.005 32.933 129.229 33.636 127.749 35.042C126.269 36.374 125.159 38.52 124.419 41.48C123.753 44.366 123.42 48.177 123.42 52.913V77H109.656ZM151.374 78.221C148.34 78.221 145.75 77.074 143.604 74.78C141.532 72.412 139.978 68.971 138.942 64.457C137.906 59.869 137.388 54.393 137.388 48.029C137.388 41.073 137.943 35.338 139.053 30.824C140.237 26.236 141.828 22.832 143.826 20.612C145.824 18.392 148.118 17.282 150.708 17.282C152.928 17.282 154.778 18.059 156.258 19.613C157.738 21.093 158.959 23.35 159.921 26.384C160.883 29.418 161.623 33.229 162.141 37.817H163.251C162.807 34.931 162.4 32.193 162.03 29.603C161.734 27.013 161.475 24.608 161.253 22.388C161.031 20.168 160.92 18.17 160.92 16.394V1.52H174.462L174.351 49.25L174.462 77H162.585L163.251 59.462H162.363C161.845 64.198 161.105 67.972 160.143 70.784C159.181 73.522 157.96 75.446 156.48 76.556C155 77.666 153.298 78.221 151.374 78.221ZM155.37 67.676C156.184 67.676 156.924 67.195 157.59 66.233C158.33 65.271 158.922 64.013 159.366 62.459C159.884 60.831 160.254 59.018 160.476 57.02C160.772 55.022 160.92 52.95 160.92 50.804V48.473C160.92 46.623 160.809 44.773 160.587 42.923C160.439 41.073 160.217 39.334 159.921 37.706C159.625 36.004 159.255 34.524 158.811 33.266C158.367 32.008 157.849 31.009 157.257 30.269C156.739 29.529 156.11 29.159 155.37 29.159C154.556 29.159 153.816 29.862 153.15 31.268C152.484 32.6 151.966 34.709 151.596 37.595C151.226 40.481 151.041 44.218 151.041 48.806C151.041 52.728 151.189 56.132 151.485 59.018C151.781 61.83 152.225 63.976 152.817 65.456C153.483 66.936 154.334 67.676 155.37 67.676ZM188.112 77L177.789 3.74H192.552L197.991 65.012H198.546L203.985 3.74H220.302L225.852 65.012H226.296L231.957 3.74H245.832L235.176 77H217.083L212.088 15.506H211.755L206.427 77H188.112ZM249.709 77V18.392H263.14V77H249.709ZM256.369 13.508C253.853 13.508 251.855 12.953 250.375 11.843C248.969 10.733 248.266 9.14199 248.266 7.06999C248.266 4.99799 248.969 3.40699 250.375 2.297C251.855 1.187 253.853 0.631997 256.369 0.631997C258.959 0.631997 260.957 1.187 262.363 2.297C263.843 3.40699 264.583 4.99799 264.583 7.06999C264.583 9.216 263.843 10.844 262.363 11.954C260.957 12.99 258.959 13.508 256.369 13.508ZM267.122 77V66.122L285.437 29.714V29.27H267.566V18.392H299.423V29.492L281.108 65.789V66.122H299.201V77H267.122Z" fill="#8800FF"/>
+        </svg>
+      </h1>
+      <div class="start">
+        <div class="block shadow">
+          <input type="text" id="seed-letter" maxlength="1" class="uppercase" style="width: 60px;">
+          <label for="seed-letter" class="color-base">Choose a letter</label>
         </div>
-        <div>
-          <label for="timer-toggle">Add a timer?</label>
-          <input type="checkbox" id="timer-toggle">
+        <div class="block">
+          <label class="switch">
+            <input type="checkbox" id="timer-toggle">
+            <span class="slider round"></span>
+          </label>
+          <label for="timer-toggle">Add timer</label>
         </div>
-        <button id="start-game">Start Game</button>
+        <button id="start-game" class="disabled">START</button>
       </div>
-      <div id="game-container" style="display: none; border: 1px solid gray; padding: 18px 30px; border-radius: 24px;">
-        <input type="text" id="word-input" placeholder="Enter a word">
-        <button id="submit-word">Submit</button>
-        <div id="message"></div>
+
+      <div id="game-container" class="shadow" style="display: none;">
+        <div class="game-info">
+          <h2 id="message"></h2>
+          <div id="timer-container"><h2 id="timer"><span>01:00</span></h2></div>
+        </div>
+        <div class="game-inputs">
+          <input type="text" id="word-input" placeholder="Enter a word">
+          <button id="submit-word">ADD WORD</button>
+        </div>
         <div id="word-list"></div>
       </div>
     </div>
-    <div class="history-section">
-      <div id="timer-container">
-        <h2>Timer</h2>
-        <span id="timer">01:00</span>
-        <hr>
-      </div>
 
-      <div id="stats">
-        <h2>Current Score</h2>
-        <hr>
+    <div class="secondary">
+      <div class="instructions">
+        <h2>How to play</h2>
+        <p>Choose a letter then type as many words as you can think of that start with that letter.</p>
+        <p>For an extra challenge, add a timer. You’ll have one minute to type as many words as you can think of.</p>
       </div>
-
-      <h2>High Scores</h2>
-      <div id="history-container">
+      
+      <div class="high-scores">
+        <h2>High Scores</h2>
+        <div id="history-container"></div>
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
