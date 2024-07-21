@@ -347,7 +347,7 @@ input:checked + .slider:before {
     padding: 18px;
     gap: 12px;
     position: absolute;
-    top: 120px;
+    top: 96px;
     width: 100%;
     z-index: 1000; /* Ensure it's above the overlay */
   }
