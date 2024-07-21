@@ -1,5 +1,6 @@
 const seedLetterInput = document.getElementById('seed-letter');
 const startGameButton = document.getElementById('start-game');
+const stopGameButton = document.getElementById('stop-game');
 const gameContainer = document.getElementById('game-container');
 const wordInput = document.getElementById('word-input');
 const submitButton = document.getElementById('submit-word');
@@ -12,13 +13,15 @@ const timerContainer = document.getElementById('timer-container');
 
 let seedLetter = '';
 let words = [];
-let wordsUntilReward = [5, 6, 7][Math.floor(Math.random() * 3)];
+let wordsUntilReward = 5;
 let stats = JSON.parse(localStorage.getItem('wordGameStats')) || {};
 let timer;
 let timeLeft = 60;
 let timerEnabled = false;
+let initialMessage = '';
 
 startGameButton.addEventListener('click', startGame);
+stopGameButton.addEventListener('click', stopGame);
 submitButton.addEventListener('click', submitWord);
 wordInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') submitWord();
@@ -55,8 +58,8 @@ function startGame() {
     }
     words = [];
     
-    // Set wordsUntilReward to a random value from [5, 6, 7]
-    wordsUntilReward = [5, 6, 7][Math.floor(Math.random() * 3)];
+    // Set wordsUntilReward to a random value from [5, 7, 9]
+    wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
 
     updateWordList();
     updateStats();
@@ -76,6 +79,22 @@ function startGame() {
     // Initialize the initial message
     initialMessage = `Add words starting with "${seedLetter.toUpperCase()}"`;
     showMessage(initialMessage, 'success');
+    
+    // Enable the stop button
+    stopGameButton.disabled = false;
+}
+
+function stopGame() {
+    clearInterval(timer);  // Clear any active timer
+    wordInput.disabled = true;
+    submitButton.disabled = true;
+    gameContainer.style.display = 'none';  // Hide the game container
+    seedLetterInput.value = '';  // Clear the seed letter input
+    seedLetterInput.disabled = false;
+    startGameButton.disabled = false;  // Enable the start button
+    startGameButton.classList.remove('disabled');  // Remove disabled class from start button
+    stopGameButton.disabled = true;  // Disable the stop button
+    showMessage('', '');  // Clear the message
 }
 
 function startTimer() {
@@ -100,7 +119,7 @@ function endGame() {
     submitButton.disabled = true;
 
     // Play 'goodjob.mp3' sound
-    const audio = new Audio('media/good-game-liam.mp3');
+    const audio = new Audio('goodjob.mp3');
     audio.play().catch(error => console.error('Error playing audio:', error));
 
     // Show confetti
@@ -146,8 +165,6 @@ function submitWord() {
     checkReward();
 }
 
-let initialMessage = '';
-
 function showMessage(text, type, keepInitialText = false) {
     if (type === 'success' && !initialMessage) {
         initialMessage = messageElement.textContent; // Save the initial message
@@ -192,13 +209,12 @@ function checkReward() {
         playRewardSound();
         
         // Set a new random value for wordsUntilReward after rewarding
-        wordsUntilReward = [5, 6, 7][Math.floor(Math.random() * 3)];
+        wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
     }
 }
 
-
 function playRewardSound() {
-    const audio = new Audio('media/confetti.mp3');
+    const audio = new Audio('reward-sound.mp3');
     audio.play().catch(error => console.error('Error playing audio:', error));
 }
 
