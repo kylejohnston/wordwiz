@@ -137,7 +137,6 @@ function endGame() {
         particleCount: 200,
         spread: 360,
         origin: { y: 0.6 },
-        shapes: ['star']
     });
 
     // Show the final message
@@ -217,7 +216,6 @@ function checkReward() {
             particleCount: 200,
             spread: 360,
             origin: { y: 0.6 },
-            shapes: ['star']
         });
         playRewardSound();
         
