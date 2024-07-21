@@ -12,7 +12,7 @@ const timerContainer = document.getElementById('timer-container');
 
 let seedLetter = '';
 let words = [];
-let wordsUntilReward = 5;
+let wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
 let stats = JSON.parse(localStorage.getItem('wordGameStats')) || {};
 let timer;
 let timeLeft = 60;
@@ -54,7 +54,10 @@ function startGame() {
         return;
     }
     words = [];
-    wordsUntilReward = 5;  // Start with a 5-word increment
+    
+    // Set wordsUntilReward to a random value from [5, 7, 9]
+    wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
+
     updateWordList();
     updateStats();
     if (timerEnabled) {
@@ -179,14 +182,17 @@ function updateStats() {
 }
 
 function checkReward() {
-    if (words.length % 5 === 0 && words.length !== 0) {
+    if (words.length % wordsUntilReward === 0 && words.length !== 0) {
         confetti({
             particleCount: 200,
             spread: 360,
             origin: { y: 0.6 },
+            shapes: ['star']
         });
         playRewardSound();
-        wordsUntilReward += 5;  // Increment by 5 words each time
+        
+        // Set a new random value for wordsUntilReward after rewarding
+        wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
     }
 }
 
