@@ -12,7 +12,7 @@ const timerContainer = document.getElementById('timer-container');
 
 let seedLetter = '';
 let words = [];
-let wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
+let wordsUntilReward = [5, 6, 7][Math.floor(Math.random() * 3)];
 let stats = JSON.parse(localStorage.getItem('wordGameStats')) || {};
 let timer;
 let timeLeft = 60;
@@ -55,8 +55,8 @@ function startGame() {
     }
     words = [];
     
-    // Set wordsUntilReward to a random value from [5, 7, 9]
-    wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
+    // Set wordsUntilReward to a random value from [5, 6, 7]
+    wordsUntilReward = [5, 6, 7][Math.floor(Math.random() * 3)];
 
     updateWordList();
     updateStats();
@@ -100,7 +100,7 @@ function endGame() {
     submitButton.disabled = true;
 
     // Play 'goodjob.mp3' sound
-    const audio = new Audio('goodjob.mp3');
+    const audio = new Audio('media/good-game-liam.mp3');
     audio.play().catch(error => console.error('Error playing audio:', error));
 
     // Show confetti
@@ -192,13 +192,13 @@ function checkReward() {
         playRewardSound();
         
         // Set a new random value for wordsUntilReward after rewarding
-        wordsUntilReward = [5, 7, 9][Math.floor(Math.random() * 3)];
+        wordsUntilReward = [5, 6, 7][Math.floor(Math.random() * 3)];
     }
 }
 
 
 function playRewardSound() {
-    const audio = new Audio('reward-sound.mp3');
+    const audio = new Audio('media/confetti.mp3');
     audio.play().catch(error => console.error('Error playing audio:', error));
 }
 
