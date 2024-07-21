@@ -128,8 +128,7 @@ function endGame() {
     wordInput.disabled = true;
     submitButton.disabled = true;
 
-    // Play 'goodjob.mp3' sound
-    const audio = new Audio('goodjob.mp3');
+    const audio = new Audio('media/good-game-liam.mp3');
     audio.play().catch(error => console.error('Error playing audio:', error));
 
     // Show confetti
@@ -225,7 +224,7 @@ function checkReward() {
 }
 
 function playRewardSound() {
-    const audio = new Audio('reward-sound.mp3');
+    const audio = new Audio('media/confetti.mp3');
     audio.play().catch(error => console.error('Error playing audio:', error));
 }
 
