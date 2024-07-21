@@ -1,3 +1,4 @@
+const overlay = document.getElementById('overlay');
 const seedLetterInput = document.getElementById('seed-letter');
 const startGameButton = document.getElementById('start-game');
 const stopGameButton = document.getElementById('stop-game');
@@ -82,6 +83,11 @@ function startGame() {
     
     // Enable the stop button
     stopGameButton.disabled = false;
+
+    // Show overlay on mobile
+    overlay.classList.add('active');
+    logo.classList.add('active');
+
 }
 
 function stopGame() {
@@ -95,6 +101,10 @@ function stopGame() {
     startGameButton.classList.remove('disabled');  // Remove disabled class from start button
     stopGameButton.disabled = true;  // Disable the stop button
     showMessage('', '');  // Clear the message
+
+    // Hide overlay on mobile
+    overlay.classList.remove('active');
+    logo.classList.remove('active');
 }
 
 function startTimer() {
@@ -133,6 +143,9 @@ function endGame() {
     // Show the final message
     messageElement.textContent = 'Game over!';
     messageElement.className = 'game-over'; // Use a specific class for game over
+
+    // Hide overlay on mobile
+    overlay.classList.remove('active');
 }
 
 function submitWord() {
